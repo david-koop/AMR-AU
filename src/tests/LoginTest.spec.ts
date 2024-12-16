@@ -15,7 +15,7 @@ test.describe.serial('Login', () => {
 
 test.beforeAll(async ({ browser }) => {
   
-  browser = await chromium.launch({ headless: true, slowMo:40 });
+  browser = await chromium.launch({ headless: false, slowMo:40 });
   context = await browser.newContext({})
   page = await context.newPage()
   
@@ -31,7 +31,7 @@ test.beforeAll(async ({ browser }) => {
     await loginPage.selectEnglishLanguage();
     await loginPage.fillNameAndPassword(email, password);
     await loginPage.clickLoginButton();
-    await loginPage.page.waitForURL('https://qa-amr-il.veritas-hr.com/?#/dashboard',{timeout:2500})    // /\/\?#\/dashboard$/
+    await loginPage.page.waitForURL('https://qa-amr-il.veritas-hr.com/?#/dashboard',)    //{timeout:2500} /\/\?#\/dashboard$/
     const url = await loginPage.getURL()
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(url).toMatch('https://qa-amr-il.veritas-hr.com/?#/dashboard')
