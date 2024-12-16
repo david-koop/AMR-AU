@@ -1,17 +1,15 @@
 pipeline {
-    agent any  // משתמש ב-Agent של Jenkins
+    agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
 
     environment {
-        // משתנה לאחסון שם התמונה שאנחנו רוצים לבנות (ללא צורך כאן אם לא משתמשים ב-Docker)
-        DOCKER_IMAGE = "playwright-project"
     }
 
     stages {
-        // שלב זה בונה את התמונה של Docker (לא נדרש אם לא משתמשים ב-Docker)
+        // שלב זה מתקין את התלויות של Node.js, כולל playwright ו-ts-node
         stage('Install Dependencies') {
             steps {
                 script {
-                    // מתקין את התלויות ב-Node.js, כולל playwright ו-ts-node
+                    // התקן את התלויות ב-Node.js
                     bat 'npm install'
                 }
             }
@@ -21,7 +19,7 @@ pipeline {
         stage('Run Playwright Tests') {
             steps {
                 script {
-                    // מריץ את הבדיקות באמצעות Playwright (באמצעות npm)
+                    // הרץ את הבדיקות באמצעות Playwright
                     bat 'npx playwright test'
                 }
             }
