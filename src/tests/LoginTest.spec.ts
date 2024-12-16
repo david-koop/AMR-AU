@@ -31,7 +31,7 @@ test.beforeAll(async ({ browser }) => {
     await loginPage.selectEnglishLanguage();
     await loginPage.fillNameAndPassword(email, password);
     await loginPage.clickLoginButton();
-    await loginPage.page.waitForURL(/\/\?#\/dashboard$/,{timeout:2500})
+    await loginPage.page.waitForURL('https://qa-amr-il.veritas-hr.com/?#/dashboard',{timeout:2500})    // /\/\?#\/dashboard$/
     const url = await loginPage.getURL()
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(url).toMatch('https://qa-amr-il.veritas-hr.com/?#/dashboard')
