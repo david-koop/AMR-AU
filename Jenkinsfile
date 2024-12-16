@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
 
-    environment {
-    }
+    // environment {
+    // }
 
     stages {
         // שלב זה מתקין את התלויות של Node.js, כולל playwright ו-ts-node
