@@ -2,6 +2,8 @@ pipeline {
     agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
 
     // environment {
+    //     // אם אתה לא משתמש ב-Docker, לא צריך את המשתנה הזה
+    //     DOCKER_IMAGE = "playwright-project"
     // }
 
     stages {
@@ -20,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // הרץ את הבדיקות באמצעות Playwright
-                    bat 'npx playwright test'
+                    bat 'npx playwright test LoginTest.spec.ts'
                 }
             }
         }
