@@ -1,11 +1,6 @@
 pipeline {
     agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
 
-    // environment {
-    //     // אם אתה לא משתמש ב-Docker, לא צריך את המשתנה הזה
-    //     DOCKER_IMAGE = "playwright-project"
-    // }
-
     stages {
         // שלב זה מתקין את התלויות של Node.js, כולל playwright ו-ts-node
         stage('Install Dependencies') {
@@ -13,6 +8,18 @@ pipeline {
                 script {
                     // התקן את התלויות ב-Node.js
                     bat 'npm install'
+                }
+            }
+        }
+
+        // שלב זה טוען את קובץ ה-.env ומוסיף את המשתנים לסביבה של Jenkins
+        stage('Prepare Environment') {
+            steps {
+                script {
+                    // טוען את כל המשתנים מקובץ .env לסביבה של Jenkins
+                    bat '''@echo off
+                    for /f "delims=" %%i in ('type C:\\Jenkins\\agent\\workspace\\AMR\\.env') do set %%i
+                    '''
                 }
             }
         }
@@ -35,6 +42,7 @@ pipeline {
         }
     }
 }
+
 
 
 // pipeline {
