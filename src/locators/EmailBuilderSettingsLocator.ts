@@ -1,0 +1,28 @@
+const EmailBuilderSettingsLocators = {
+    EmailTab: 'a[ui-sref="settings.email"]',
+    emailSendingRulesSubTab: 'a[ui-sref="settings.email.builder"]',
+    emailTemplateSubTab: 'a[ui-sref="settings.email.templates"]',
+    emailQueueSubTab: 'a[ui-sref="settings.email.queue"]',
+    addEmailTemplateButton: 'button[ng-click="addEmailTemplate()"]',
+    templateNameField: '#tpl-name',
+    templateSubjectField: '#tpl-subject',
+    templateContentField: '#tpl-content',
+    addTagDropdown: '#add-tag-dropdown',
+    rtlTemplateCheckBox: 'label[for="tpl-rtl"]',
+    saveTemplateButton: '[ng-click="save()"]',
+    successSaveMessage:'div[role="alert"][type="success"]',
+    templateRowName: '.cn-accordion-title.ng-binding',
+    addEmailRule: '.fa.fa-plus',
+    ruleNameField: '#tpl-name',
+    selectTagsDropDown:'input[placeholder="Select tags..."]',
+    tagsName:'.nvc-ms-popover-tab-item-name',
+    selectStatusesDropDown:'input[placeholder="Select status..."]',
+    statusName:'.nvc-sl-popover-item-name.ng-binding',
+    selectTemplateDropDown:'input[placeholder="Select template..."]',
+    selectRecipientDropDown:'input[placeholder="Select recipient type..."]',
+    templateAndRecipientName:'.nvc-sl-popover-item-name.ng-binding',
+    saveRuleButton: '[ng-click="save()"]',
+    ruleNameRow:'[ng-repeat="rule in rules"]',
+ 
+}
+export default EmailBuilderSettingsLocators
