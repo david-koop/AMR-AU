@@ -1,5 +1,8 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { EmailBuilderSettingsPage } from '../pages/EmailBuilderSettingsPage';
+import { EMAIL_CONTENT_CANDIDATE, EMAIL_CONTENT_INTERVIEWER } from '../../texts';
+
+
 
 let page: Page;
 let context: BrowserContext;
@@ -12,10 +15,10 @@ const emailUrl = 'settings/email/builder'
 const organizationName = process.env.ORGANIZATION_NAME
 const templateCandidateName = process.env.EMAIL_TEMPLATE_NAME
 const subjectCandidate = 'Candidate'
-const contentCandidate = process.env.EMAIL_CONTENT_CANDIDATE
+const contentCandidate = EMAIL_CONTENT_CANDIDATE
 const templateInterviewerName = process.env.INTERVIEWER_EMAIL_TEMPLATE_NAME
 const subjectInterviewer = 'Interviewer'
-const contentInterviewer = process.env.EMAIL_CONTENT_INTERVIEWER
+const contentInterviewer = EMAIL_CONTENT_INTERVIEWER
 const ruleCandidateName = 'Rule Candidate'
 const ruleInterviewerName = 'Rule Interviewer'
 

@@ -3,10 +3,12 @@
     "target": "ES6",                      
     "module": "commonjs",                 
     "strict": true,                       
-    "esModuleInterop": true,               
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,               
     "skipLibCheck": true,                 
     "outDir": "./dist",                 
-    "rootDir": "./src",                  
+    "rootDir": "./",                  
     "baseUrl": ".",                       
     "paths": {
       "*": ["node_modules/*", "src/types/*"] 
@@ -15,7 +17,7 @@
   "include": [
     "src/**/*" ,
     "env.d.ts"
-  ],
+, "texts.ts"  ],
   "exclude": [
     "node_modules",  
     "dist"           

@@ -1,5 +1,6 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { SMSBuilderSettingsPage } from '../pages/SMSBuilderSettingsPage';
+import { SMS_CONTENT } from '../../texts';
 
 let page: Page;
 let context: BrowserContext;
@@ -11,7 +12,7 @@ const BaseUrl = ''
 const SMSUrl = 'settings/sms/builder'
 const organizationName = process.env.ORGANIZATION_NAME
 const templateName = process.env.SMS_TEMPLATE_NAME
-const content = process.env.SMS_CONTENT
+const content = SMS_CONTENT
 const ruleName = 'Rule SMS'
 
 test.describe.serial('SMS Builder Settings', () => {
