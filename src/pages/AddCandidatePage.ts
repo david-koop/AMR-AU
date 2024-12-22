@@ -2,7 +2,6 @@ import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { MainDashboardPage } from "./MainDashboardPage";
 import { clickAndFill } from "../utils/pageUtils";
-import AddPositionLocators from "../locators/AddPositionLocator";
 import AddCandidateLocators from "../locators/AddCandidateLocator";
 
 export type language = 'Arabic' | 'English' | 'Hebrew' | 'Russian'
@@ -155,6 +154,8 @@ export class AddCandidatePage extends BasePage {
         return url;
     }
 }
+
+
 export function generateID(): number {
 
     return Math.floor(Math.random() * 9000000) + 1000000;
@@ -187,3 +188,8 @@ export function getRandomLetters(): string {
     
     return firstLetter + secondLetter + thirdLetter;
   }
+
+  export function generateTwoNumbers(): number {
+
+    return Math.floor(Math.random() * 90) + 10;
+}

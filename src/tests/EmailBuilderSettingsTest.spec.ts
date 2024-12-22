@@ -1,6 +1,6 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { EmailBuilderSettingsPage } from '../pages/EmailBuilderSettingsPage';
-import { EMAIL_CONTENT_CANDIDATE, EMAIL_CONTENT_INTERVIEWER } from '../../texts';
+import { EMAIL_CONTENT_CANDIDATE, EMAIL_CONTENT_INTERVIEWER, EMAIL_TEMPLATE_NAME, INTERVIEWER_EMAIL_TEMPLATE_NAME } from '../../texts';
 
 
 
@@ -13,10 +13,10 @@ const password = process.env.PASSWORD || ''
 const BaseUrl = ''
 const emailUrl = 'settings/email/builder'
 const organizationName = process.env.ORGANIZATION_NAME
-const templateCandidateName = process.env.EMAIL_TEMPLATE_NAME
+const templateCandidateName = EMAIL_TEMPLATE_NAME
 const subjectCandidate = 'Candidate'
 const contentCandidate = EMAIL_CONTENT_CANDIDATE
-const templateInterviewerName = process.env.INTERVIEWER_EMAIL_TEMPLATE_NAME
+const templateInterviewerName = INTERVIEWER_EMAIL_TEMPLATE_NAME
 const subjectInterviewer = 'Interviewer'
 const contentInterviewer = EMAIL_CONTENT_INTERVIEWER
 const ruleCandidateName = 'Rule Candidate'
@@ -44,7 +44,7 @@ test.describe.serial('Email Builder Settings', () => {
 
     await emailBuilderSettingsPage.gotoSettingsORG(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 
@@ -89,6 +89,7 @@ test.describe.serial('Email Builder Settings', () => {
 
     await emailBuilderSettingsPage.addNewEmailRule(ruleInterviewerName,'Personal interview','Assigned to Personal evaluation',templateInterviewerName,'Interviewer')
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
+    // need to add IF condition that if we got a error MSG that there is a same rule so the test will get success result
     await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
     await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleCandidateName).first()).toHaveText(ruleCandidateName)
     await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleInterviewerName).first()).toHaveText(ruleInterviewerName)

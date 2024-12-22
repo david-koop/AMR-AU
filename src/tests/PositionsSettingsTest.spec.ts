@@ -1,16 +1,17 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { PositionsSettingsPage, questionTypes } from '../pages/PositionsSettingsPage';
+import { baseURL, FORM_TEMPLATE_NAME } from '../../texts';
 
 let page: Page;
 let context: BrowserContext;
 
 
-let email = process.env.EMAIL || ''  // 'dudikoop@gmail.comm'
-const password = process.env.PASSWORD || ''
-const BaseUrl = ''
+let email = process.env.EMAIL
+const password = process.env.PASSWORD
+const BaseUrl = baseURL
 const positionsUrl = 'settings/positions/form_templates'
 const organizationName = process.env.ORGANIZATION_NAME
-const formTemplateName = process.env.FORM_TEMPLATE_NAME
+const formTemplateName = FORM_TEMPLATE_NAME
 
 test.describe.serial('Positions Settings', () => {
 
@@ -34,7 +35,7 @@ test.describe.serial('Positions Settings', () => {
 
     await positionsSettingsPage.gotoSettingsORG(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 

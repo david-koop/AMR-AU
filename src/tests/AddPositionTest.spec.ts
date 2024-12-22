@@ -1,6 +1,7 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { SMSBuilderSettingsPage } from '../pages/SMSBuilderSettingsPage';
 import { AddPositionPage } from '../pages/AddPositionPage';
+import { BRANCH_NAME1, EMAIL_TEMPLATE_NAME, FORM_TEMPLATE_NAME, SMS_TEMPLATE_NAME } from '../../texts';
 
 let page: Page;
 let context: BrowserContext;
@@ -11,16 +12,16 @@ const password = process.env.PASSWORD || ''
 const BaseUrl = ''
 const positionUrl = 'position/0/general'
 const organizationName = process.env.ORGANIZATION_NAME
-const emailTemplateName = process.env.EMAIL_TEMPLATE_NAME
-const SMSTemplateName = process.env.SMS_TEMPLATE_NAME
+const emailTemplateName = EMAIL_TEMPLATE_NAME
+const SMSTemplateName = SMS_TEMPLATE_NAME
 const positionTitle = 'position automation'
-const branchName = process.env.BRANCH_NAME1
+const branchName = BRANCH_NAME1
 const groupStepName = 'group'
 const veritasStepName = 'Veritas'
-const customerName = '0 Tzvika QA'
-const positionName = 'tzv position 8.5'
+const customerName = 'qa tzv can be deleted'//'0 Tzvika QA'
+const positionName = 'tzv 30.6'//'tzv position 8.5'
 const genericName = 'generic'
-const loadTemplateName = process.env.FORM_TEMPLATE_NAME
+const loadTemplateName = FORM_TEMPLATE_NAME
 const onlineSurveyName = 'online survey'
 const formTitleField = 'form Title'
 const formDescriptionField = 'form Description'
@@ -51,7 +52,7 @@ test.describe.serial('Add Position', () => {
 
     await addPositionPage.gotoAddPositionPage(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 

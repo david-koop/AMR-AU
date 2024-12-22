@@ -1,6 +1,6 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { SMSBuilderSettingsPage } from '../pages/SMSBuilderSettingsPage';
-import { SMS_CONTENT } from '../../texts';
+import { SMS_CONTENT, SMS_TEMPLATE_NAME } from '../../texts';
 
 let page: Page;
 let context: BrowserContext;
@@ -11,7 +11,7 @@ const password = process.env.PASSWORD || ''
 const BaseUrl = ''
 const SMSUrl = 'settings/sms/builder'
 const organizationName = process.env.ORGANIZATION_NAME
-const templateName = process.env.SMS_TEMPLATE_NAME
+const templateName = SMS_TEMPLATE_NAME
 const content = SMS_CONTENT
 const ruleName = 'Rule SMS'
 
@@ -37,7 +37,7 @@ test.describe.serial('SMS Builder Settings', () => {
 
     await smsBuilderSettingsPage.gotoSettingsORG(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 
@@ -68,6 +68,7 @@ test.describe.serial('SMS Builder Settings', () => {
     await smsBuilderSettingsPage.clickSMSSendingRulesSubTab()
     await smsBuilderSettingsPage.addNewSMSRule(ruleName, 'Personal interview', 'Assigned to Personal evaluation', templateName)
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
+    // need to add IF condition that if we got a error MSG that there is a same rule so the test will get success result
     await expect(smsBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
     await smsBuilderSettingsPage.successSaveMessage.waitFor({ state: 'hidden' })
     await expect(smsBuilderSettingsPage.ruleNameRow.getByText(ruleName).first()).toHaveText(ruleName)

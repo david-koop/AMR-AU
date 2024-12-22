@@ -1,14 +1,12 @@
 import { test, expect, Page, chromium } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
 import { MainDashboardPage } from '../pages/MainDashboardPage';
 
 let page: Page;
 let context;
 
 
-const email = process.env.EMAIL || ''  // 'dudikoop@gmail.comm'
-const password = process.env.PASSWORD || ''
-const Baseurl =
+const email = process.env.EMAIL 
+const password = process.env.PASSWORD
 
 
   test.describe.serial('Change Password', () => {

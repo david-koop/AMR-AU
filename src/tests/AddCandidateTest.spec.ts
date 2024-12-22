@@ -10,7 +10,7 @@ const password = process.env.PASSWORD || ''
 const BaseUrl = ''
 const Url = '/#/'
 const organizationName = process.env.ORGANIZATION_NAME
-const positionName = 'QA Position 1'
+const positionName = 'position automation'//'QA Position 1'
 const firstName = 'dudua' + getRandomLetters()
 const lastName = 'QAAqq' + getRandomLetters()
 const mobilePhone = '054' + generateID()
@@ -52,7 +52,7 @@ test.describe.serial('Add Candidate', () => {
 
     await addCandidatePage.gotoAddCandidatePage(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await addCandidatePage.page.waitForLoadState('load')
     let url = await addCandidatePage.getURL()
     await addCandidatePage.page.waitForTimeout(3000)

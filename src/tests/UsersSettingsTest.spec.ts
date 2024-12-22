@@ -2,22 +2,24 @@ import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { GeneralDetailsSettingsPage } from '../pages/GeneralDetailsSettingsPage';
 import { permissions, UsersSettingsPage } from '../pages/UsersSettingsPage';
 import { MainDashboardPage } from '../pages/MainDashboardPage';
+import { generateTwoNumbers } from '../../src/pages/AddCandidatePage';
+import { baseURL, ROLE_NAME } from '../../texts';
 
 let page: Page;
 let context: BrowserContext;
 
 
-let email = process.env.EMAIL || ''  // 'dudikoop@gmail.comm'
-const password = process.env.PASSWORD || ''
+let email = process.env.EMAIL
+const password = process.env.PASSWORD
 const orgUserEmail = process.env.ORG_USER_EMAIL
 const orgUserPassword = process.env.ORG_USER_PASSWORD
-const firstName = 'automation'
+const firstName = 'automation' + generateTwoNumbers()
 const lastName = 'user'
 const zoomLink = 'https://adam-milo.zoom.us/j/81610876632?pwd=WkBJL383QF52IO6WNafltkSAfTrw5k.1'
-const BaseUrl = ''
+const BaseUrl = baseURL
 const settingsUrl = '?#/settings/users/list'
 const organizationName = process.env.ORGANIZATION_NAME
-const roleName = 'interviewer role'
+const roleName = ROLE_NAME
 const duplicateEmail = true
 
 test.describe.serial('Users Settings', () => {
@@ -44,7 +46,7 @@ test.describe.serial('Users Settings', () => {
     
 
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
     
     

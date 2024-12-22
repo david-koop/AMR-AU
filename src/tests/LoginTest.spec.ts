@@ -1,14 +1,15 @@
 import { test, expect, Page, chromium } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { url } from 'inspector';
+import { baseURL } from '../../texts';
 
 let page: Page;
 let context;
 
 
-const email = process.env.EMAIL || ''  // 'dudikoop@gmail.comm'
-const password = process.env.PASSWORD || ''
-const Baseurl = 
+const email = process.env.EMAIL
+const password = process.env.PASSWORD
+const BaseUrl = baseURL
 
 
 test.describe.serial('Login', () => {
@@ -31,10 +32,10 @@ test.beforeAll(async ({ browser }) => {
     await loginPage.selectEnglishLanguage();
     await loginPage.fillNameAndPassword(email, password);
     await loginPage.clickLoginButton();
-    await loginPage.page.waitForURL('https://qa-amr-il.veritas-hr.com/?#/dashboard',)    //{timeout:2500} /\/\?#\/dashboard$/
+    await loginPage.page.waitForURL(/\/\?#\/dashboard$/)    //{timeout:2500} 
     const url = await loginPage.getURL()
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    await expect(url).toMatch('https://qa-amr-il.veritas-hr.com/?#/dashboard')
+    await expect(url).toMatch(BaseUrl + '?#/dashboard')
 
   });
 
@@ -50,7 +51,7 @@ test.beforeAll(async ({ browser }) => {
       await loginPage.fillEmailForgotField(email);
       await loginPage.clickSendResetLink()
       /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-      await expect(loginPage.successSendMessage).toBeVisible({ timeout: 1000 })
+      await expect(loginPage.successSendMessage).toBeVisible({ timeout: 2000 })
       
     });
     

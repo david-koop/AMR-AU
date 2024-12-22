@@ -2,18 +2,19 @@ import { test, expect, Page, chromium } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { MainDashboardPage } from '../pages/MainDashboardPage';
 import { GeneralDetailsSettingsPage } from '../pages/GeneralDetailsSettingsPage';
+import { baseURL, BRANCH_NAME1, BRANCH_NAME2 } from '../../texts';
 
 let page: Page;
 let context;
 
 
-const email = process.env.EMAIL || ''  // 'dudikoop@gmail.comm'
-const password = process.env.PASSWORD || ''
-const BaseUrl = ''
+const email = process.env.EMAIL
+const password = process.env.PASSWORD
+const BaseUrl = baseURL
 const settingsUrl = '?#/settings/general/org_details'
 const organizationName = process.env.ORGANIZATION_NAME
-const brachName1 = process.env.BRANCH_NAME1
-const brachName2 = process.env.BRANCH_NAME2
+const brachName1 = BRANCH_NAME1
+const brachName2 = BRANCH_NAME2
 
 
 
@@ -35,7 +36,7 @@ test.describe.serial('Organization settings - general', () => {
 
     await settingsPage.gotoGeneralSettingsORG(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 

@@ -35,7 +35,7 @@ test.describe.serial('Veritas Integration Settings', () => {
 
     await veritasIntegrationSettingsPage.gotoSettingsORG(email, password, organizationName);
 
-    //this timeout is because the AMR system return after 1 second to dashboard!
+    //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
 
 

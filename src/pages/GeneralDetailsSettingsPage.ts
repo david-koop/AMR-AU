@@ -73,9 +73,14 @@ export class GeneralDetailsSettingsPage extends BasePage {
 
     async uploadLogo() {
         await this.imageLogo.hover({ timeout: 1500 });
+        // promise of upload logo request
+        const responsePromise = this.page.waitForResponse(response =>
+            /\/upload_logo.*/.test(response.url()) && response.status() === 200);
+
         await this.inputImageLogo.setInputFiles('C:/Users/DavidKoop/OneDrive - RavTech/Desktop/AU-AMR/upload-files/mediaQuestion2.jpg');
-        await this.page.waitForTimeout(500)
-        await this.clickSaveDetails()
+
+        const response = await responsePromise;
+        await this.clickSaveDetails();
     }
 
     async checkSMTPEmail(email: string) {

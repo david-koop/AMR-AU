@@ -1,3 +1,19 @@
+import { generateID, generateTwoNumbers } from "./src/pages/AddCandidatePage";
+
+export const baseURL = 'https://amr-il.veritas-hr.com/' // qa-
+
+
+export const BRANCH_NAME1 = 'prodBranch' + generateTwoNumbers()
+export const BRANCH_NAME2 = 'prodBranch' + generateTwoNumbers()
+
+
+export const ROLE_NAME = 'interviewer role11' + generateTwoNumbers()
+
+export const EMAIL_TEMPLATE_NAME = 'template candidate'
+export const INTERVIEWER_EMAIL_TEMPLATE_NAME = 'template interviewer'
+export const SMS_TEMPLATE_NAME = 'template SMS'
+export const FORM_TEMPLATE_NAME = 'template form'
+
 
 export const EMAIL_CONTENT_CANDIDATE = `!!מועמד
 [link="aaaaaaaaa.com" text="111"]
@@ -22,7 +38,9 @@ veritas [veritas_test_link]
 [process_step] שלב בתהליך
 [waive_reason] סיבת פרישה`;
 
+
 export const EMAIL_CONTENT_INTERVIEWER = `מראיין`;
+
 
 export const SMS_CONTENT = `[interviewer] = מראיין
 [online_form_link] = שאלון מקוון
