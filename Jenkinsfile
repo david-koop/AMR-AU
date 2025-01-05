@@ -1,6 +1,17 @@
 pipeline {
     agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
 
+
+//    options {
+//         // מבצע כישלון מיידי אם טסט נכשל
+//         failFast true
+//     }
+
+
+
+
+
+
     stages {
         // שלב זה מתקין את התלויות של Node.js, כולל playwright ו-ts-node
         stage('Install Dependencies') {
@@ -30,6 +41,12 @@ pipeline {
                 script {
                     // הרץ את הבדיקות באמצעות Playwright
                     bat 'npx playwright test LoginTest.spec.ts'
+
+                     // הרץ את הבדיקה השנייה
+                    bat 'npx playwright test ChangePasswordTest.spec.ts'
+
+                    // הרץ את הבדיקה השלישית
+                    bat 'npx playwright test GeneralSettingsTest.spec.ts'
                 }
             }
         }
