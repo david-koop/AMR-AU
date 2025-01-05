@@ -15,7 +15,7 @@ const organizationName = process.env.ORGANIZATION_NAME
 const emailTemplateName = EMAIL_TEMPLATE_NAME
 const SMSTemplateName = SMS_TEMPLATE_NAME
 const positionTitle = 'position automation'
-const branchName = BRANCH_NAME1
+const branchName =    'QA branch1' //BRANCH_NAME1
 const groupStepName = 'group'
 const veritasStepName = 'Veritas'
 const customerName = 'qa tzv can be deleted'//'0 Tzvika QA'
@@ -75,7 +75,7 @@ test.describe.serial('Add Position', () => {
     await addPositionPage.savePosition();
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(addPositionPage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    await addPositionPage.successSaveMessage.waitFor({ state: 'hidden' })
+    await addPositionPage.clickCloseMessageButton()
 
 
 

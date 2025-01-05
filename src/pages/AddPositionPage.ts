@@ -58,7 +58,9 @@ export class AddPositionPage extends BasePage {
     private formsSurveyTab: Locator;
     private formTitleField: Locator;
     private formDescriptionField: Locator;
+    private XButton: Locator;
     successSaveMessage: Locator;
+
 
 
 
@@ -106,6 +108,8 @@ export class AddPositionPage extends BasePage {
         this.formsSurveyTab = this.page.locator(AddPositionLocators.formsSurveyTab);
         this.formTitleField = this.page.locator(AddPositionLocators.formTitleField);
         this.formDescriptionField = this.page.locator(AddPositionLocators.formDescriptionField);
+        this.XButton = this.page.locator(AddPositionLocators.XButton);
+
 
     }
 
@@ -153,10 +157,10 @@ export class AddPositionPage extends BasePage {
         await this.selectPositionDropdown.click();
         await this.positionsName.getByText(positionName).click();
         await this.selectEmailTemplateDropdown.click();
-        await this.emailTemplateName.getByText(emailTemplateName).click();
+        await this.emailTemplateName.getByText(emailTemplateName).first().click();
         await this.SMSCheckBox.check();
         await this.selectSMSTemplateDropdown.click();
-        await this.SMSTemplateName.getByText(SMSTemplateName).click();
+        await this.SMSTemplateName.getByText(SMSTemplateName).first().click();
 
     }
 
@@ -179,10 +183,10 @@ export class AddPositionPage extends BasePage {
         await this.stepTypeName.getByText(stepTypeOnline).click();
         await this.Email_SMSRadioButton.getByText(emailMethod).check();
         await this.onlineSurveySelectTemplate.click();
-        await this.templateName.getByText(emailTemplateName).click()
+        await this.templateName.getByText(emailTemplateName).first().click()
         await this.Email_SMSRadioButton.getByText(smsMethod).check();
         await this.onlineSurveySelectTemplate.click();
-        await this.templateName.getByText(SMSTemplateName).click();
+        await this.templateName.getByText(SMSTemplateName).first().click();
         await this.sendingTypeManualRadioButton.check();
         await this.formsSurveyTab.click();
         await clickAndFill(this.formTitleField, formTitleField);
@@ -220,6 +224,9 @@ export class AddPositionPage extends BasePage {
     }
 
 
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
 
 
 

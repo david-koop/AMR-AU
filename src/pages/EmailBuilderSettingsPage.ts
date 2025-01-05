@@ -43,9 +43,12 @@ export class EmailBuilderSettingsPage extends BasePage {
     private selectRecipientDropDown: Locator;
     private templateAndRecipientName: Locator;
     private saveRuleButton: Locator;
+    private XButton: Locator;
     templateRowName: Locator;
     ruleNameRow: Locator;
     successSaveMessage: Locator;
+    alreadyExistingRuleMessage: Locator;
+    cancelRuleButton: Locator;
 
 
     constructor(page: Page) {
@@ -73,7 +76,10 @@ export class EmailBuilderSettingsPage extends BasePage {
         this.selectRecipientDropDown = this.page.locator(EmailBuilderSettingsLocators.selectRecipientDropDown);
         this.templateAndRecipientName = this.page.locator(EmailBuilderSettingsLocators.templateAndRecipientName);
         this.saveRuleButton = this.page.locator(EmailBuilderSettingsLocators.saveRuleButton);
+        this.cancelRuleButton = this.page.locator(EmailBuilderSettingsLocators.cancelRuleButton);
         this.ruleNameRow = this.page.locator(EmailBuilderSettingsLocators.ruleNameRow);
+        this.alreadyExistingRuleMessage = this.page.locator(EmailBuilderSettingsLocators.alreadyExistingRuleMessage).getByText('matching the already existing rule');
+        this.XButton = this.page.locator(EmailBuilderSettingsLocators.XButton);
 
     }
 
@@ -112,7 +118,7 @@ export class EmailBuilderSettingsPage extends BasePage {
         await this.saveTemplateButton.click()
     }
 
-    async addNewEmailRule(ruleName: string, tagName: tags, status: status,templateName:string, recipient: recipient) {
+    async addNewEmailRule(ruleName: string, tagName: tags, status: status, templateName: string, recipient: recipient) {
         await this.addEmailRule.click();
         await clickAndFill(this.ruleNameField, ruleName);
         await this.selectTagsDropDown.click();
@@ -120,16 +126,18 @@ export class EmailBuilderSettingsPage extends BasePage {
         await this.selectStatusesDropDown.click();
         await this.statusName.getByText(status).click();
         await this.page.waitForTimeout(500);
-        await this.selectTemplateDropDown.click({delay:50});
-        await this.templateAndRecipientName.getByText(templateName).click({delay:10});
+        await this.selectTemplateDropDown.click({ delay: 50 });
+        await this.templateAndRecipientName.getByText(templateName).first().click({ delay: 10 });
         await this.page.waitForTimeout(500);
         await this.selectRecipientDropDown.click();
-        await this.templateAndRecipientName.getByText(recipient,{exact:true}).click();
+        await this.templateAndRecipientName.getByText(recipient, { exact: true }).click();
         await this.page.waitForTimeout(500);
         await this.saveRuleButton.click()
     }
 
-
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
 
 
 

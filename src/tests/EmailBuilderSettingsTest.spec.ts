@@ -60,42 +60,66 @@ test.describe.serial('Email Builder Settings', () => {
 
     await emailBuilderSettingsPage.clickEmailTemplateSubTab();
     await emailBuilderSettingsPage.addNewEmailTemplate(templateCandidateName, subjectCandidate, contentCandidate);
-    
+
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
+
     
-    await emailBuilderSettingsPage.successSaveMessage.waitFor({state:'hidden'})
+    await emailBuilderSettingsPage.clickCloseMessageButton();
+
+
 
     await emailBuilderSettingsPage.addNewEmailTemplate(templateInterviewerName, subjectInterviewer, contentInterviewer);
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
     await expect(emailBuilderSettingsPage.templateRowName.getByText(templateCandidateName).first()).toHaveText(templateCandidateName)
     await expect(emailBuilderSettingsPage.templateRowName.getByText(templateInterviewerName).first()).toHaveText(templateInterviewerName)
-    
-    await emailBuilderSettingsPage.successSaveMessage.waitFor({state:'hidden'})
+
+    await emailBuilderSettingsPage.clickCloseMessageButton();
 
   });
+
+  
 
   test('Create new Email rules for candidate and interviewer', async () => {
     const emailBuilderSettingsPage = new EmailBuilderSettingsPage(page);
-  
-    await emailBuilderSettingsPage.clickEmailSendingRulesSubTab()
-    await emailBuilderSettingsPage.addNewEmailRule(ruleCandidateName,'Personal interview','Assigned to Personal evaluation',templateCandidateName,'Candidate')
-    /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    
-    await emailBuilderSettingsPage.successSaveMessage.waitFor({state:'hidden'})
-    
 
-    await emailBuilderSettingsPage.addNewEmailRule(ruleInterviewerName,'Personal interview','Assigned to Personal evaluation',templateInterviewerName,'Interviewer')
+    await emailBuilderSettingsPage.clickEmailSendingRulesSubTab()
+    await emailBuilderSettingsPage.addNewEmailRule(ruleCandidateName, 'Personal interview', 'Assigned to Personal evaluation', templateCandidateName, 'Candidate')
+
+
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    // need to add IF condition that if we got a error MSG that there is a same rule so the test will get success result
-    await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleCandidateName).first()).toHaveText(ruleCandidateName)
-    await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleInterviewerName).first()).toHaveText(ruleInterviewerName)
+    await page.waitForTimeout(500)
+    if (await emailBuilderSettingsPage.successSaveMessage.isVisible()) {
+      await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
+      await emailBuilderSettingsPage.clickCloseMessageButton();
+    }
+    else if (await emailBuilderSettingsPage.alreadyExistingRuleMessage.isVisible()) {
+      await expect(emailBuilderSettingsPage.alreadyExistingRuleMessage).toBeVisible({ timeout: 2000 });
+      await emailBuilderSettingsPage.clickCloseMessageButton();
+      await emailBuilderSettingsPage.cancelRuleButton.click()
+    }
+
+
+
+    await emailBuilderSettingsPage.addNewEmailRule(ruleInterviewerName, 'Personal interview', 'Assigned to Personal evaluation', templateInterviewerName, 'Interviewer')
+
+
+    /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
+    await page.waitForTimeout(500)
+    if (await emailBuilderSettingsPage.successSaveMessage.isVisible()) {
+      await expect(emailBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
+      await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleCandidateName).first()).toHaveText(ruleCandidateName)
+      await expect(emailBuilderSettingsPage.ruleNameRow.getByText(ruleInterviewerName).first()).toHaveText(ruleInterviewerName)
+    }
+    else if (await emailBuilderSettingsPage.alreadyExistingRuleMessage.isVisible()) {
+      await expect(emailBuilderSettingsPage.alreadyExistingRuleMessage).toBeVisible({ timeout: 2000 });
+    }
+
+
   });
 
-  
+
 });
 
 

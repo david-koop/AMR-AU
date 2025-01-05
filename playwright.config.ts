@@ -37,8 +37,8 @@ export default defineConfig({
   use: {
     headless:false,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://qa-amr-il.veritas-hr.com/',
-    // baseURL: 'https://amr-il.veritas-hr.com/',
+    // baseURL: 'http://qa-amr-il.veritas-hr.com/',
+    baseURL: 'https://amr-il.veritas-hr.com/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

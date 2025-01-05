@@ -1,6 +1,7 @@
 import { test, expect, Page, chromium, BrowserContext } from '@playwright/test';
 import { PositionsSettingsPage, questionTypes } from '../pages/PositionsSettingsPage';
 import { baseURL, FORM_TEMPLATE_NAME } from '../../texts';
+import { getRandomLetters } from '../../src/pages/AddCandidatePage';
 
 let page: Page;
 let context: BrowserContext;
@@ -50,7 +51,13 @@ test.describe.serial('Positions Settings', () => {
 
 
     await positionsSettingsPage.clickFormTemplatesSubTab();
-    await positionsSettingsPage.addNewTemplate(formTemplateName, questionTypes);
+    if (await positionsSettingsPage.templateRowName.getByText(formTemplateName).isHidden()) {
+      await positionsSettingsPage.addNewTemplate(formTemplateName, questionTypes);
+
+    } else {
+      
+      await positionsSettingsPage.addNewTemplate(FORM_TEMPLATE_NAME + getRandomLetters(), questionTypes);
+    }
     await page.waitForTimeout(1000)
 
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/

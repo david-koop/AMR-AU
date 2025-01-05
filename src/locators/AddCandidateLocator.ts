@@ -30,6 +30,8 @@ const AddCandidateLocators = {
     MergeCandidateTitle:'.cheader__title', // Suggested Candidates
     saveWithoutMergeButton:'button[ng-click="save()"]',
     successSaveMessage:'div[role="alert"][type="success"]',
+    XButton: '[aria-hidden="true"]',
+
 
 }
 export default AddCandidateLocators

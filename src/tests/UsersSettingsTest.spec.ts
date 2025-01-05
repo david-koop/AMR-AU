@@ -43,13 +43,13 @@ test.describe.serial('Users Settings', () => {
     const usersSettingsPage = new UsersSettingsPage(page);
 
     await usersSettingsPage.gotoSettingsORG(email, password, organizationName);
-    
+
 
 
     //This timeout is because the AMR system returns after one second to the dashboard!
     await page.waitForLoadState('domcontentloaded')
-    
-    
+
+
     await page.waitForTimeout(3000)
     let url = await usersSettingsPage.getURL()
     if (!url.endsWith(settingsUrl)) {
@@ -57,7 +57,7 @@ test.describe.serial('Users Settings', () => {
       await usersSettingsPage.clickUsersSettingsPage()
     }
 
- 
+
 
 
     await usersSettingsPage.clickRolesSubTab();
@@ -74,16 +74,20 @@ test.describe.serial('Users Settings', () => {
   test('Create new user with the new role', async () => {
     const usersSettingsPage = new UsersSettingsPage(page);
 
-    await usersSettingsPage.successMessage.waitFor({ state: 'hidden' })
+    await usersSettingsPage.clickCloseMessageButton()
 
     await usersSettingsPage.clickUserListSubTab();
     await usersSettingsPage.addNewUser(firstName, lastName, orgUserEmail, roleName, zoomLink, orgUserPassword)
 
 
-    while(duplicateEmail){
-      if(await usersSettingsPage.duplicateEmail.isVisible({timeout:2000})){
-        email =   await usersSettingsPage.changeNewUserEmail(email);
-        await usersSettingsPage.duplicateEmail.waitFor({state:'hidden'})
+    while (duplicateEmail) {
+
+      await page.waitForTimeout(500)
+
+
+      if (await usersSettingsPage.duplicateEmail.isVisible({ timeout: 2000 })) {
+        email = await usersSettingsPage.changeNewUserEmail(email);
+        await usersSettingsPage.clickCloseMessageButton()
         await usersSettingsPage.updateEmailField(email);
       } else {
         break
@@ -115,9 +119,4 @@ test('Login with the new user', async ({ browser }) => {
 
   await context.close();
 });
-
-
-
-
-
 

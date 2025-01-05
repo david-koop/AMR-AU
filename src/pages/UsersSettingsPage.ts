@@ -34,6 +34,7 @@ export class UsersSettingsPage extends BasePage {
     private newPasswordField: Locator;
     private confirmPasswordField: Locator;
     private saveUserButton: Locator;
+    private XButton: Locator;
     usersOrRolesNameRow: Locator;
     successMessage: Locator;
     duplicateEmail: Locator;
@@ -62,6 +63,8 @@ export class UsersSettingsPage extends BasePage {
         this.usersOrRolesNameRow = this.page.locator(UsersSettingsLocators.usersOrRolesNameRow);
         this.successMessage = this.page.locator(UsersSettingsLocators.successMessage);
         this.duplicateEmail = this.page.locator(UsersSettingsLocators.duplicateEmail).getByText('Duplicate user: "Email"');
+        this.XButton = this.page.locator(UsersSettingsLocators.XButton);
+
     }
 
     async gotoSettingsORG(name: string, password: string, organizationName: string) {
@@ -127,7 +130,9 @@ export class UsersSettingsPage extends BasePage {
     }
 
 
-
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
 
 
     async getURL() {

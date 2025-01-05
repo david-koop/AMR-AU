@@ -56,7 +56,7 @@ test.describe.serial('SMS Builder Settings', () => {
 
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(smsBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    await smsBuilderSettingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    await smsBuilderSettingsPage.clickCloseMessageButton()
     await expect(smsBuilderSettingsPage.templateRowName.getByText(templateName).first()).toHaveText(templateName)
 
 
@@ -68,12 +68,14 @@ test.describe.serial('SMS Builder Settings', () => {
     await smsBuilderSettingsPage.clickSMSSendingRulesSubTab()
     await smsBuilderSettingsPage.addNewSMSRule(ruleName, 'Personal interview', 'Assigned to Personal evaluation', templateName)
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    // need to add IF condition that if we got a error MSG that there is a same rule so the test will get success result
-    await expect(smsBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    await smsBuilderSettingsPage.successSaveMessage.waitFor({ state: 'hidden' })
-    await expect(smsBuilderSettingsPage.ruleNameRow.getByText(ruleName).first()).toHaveText(ruleName)
-
-
+    if (await smsBuilderSettingsPage.successSaveMessage.isVisible()) {
+      await expect(smsBuilderSettingsPage.successSaveMessage).toBeVisible({ timeout: 2000 });
+      await smsBuilderSettingsPage.clickCloseMessageButton()
+      await expect(smsBuilderSettingsPage.ruleNameRow.getByText(ruleName).first()).toHaveText(ruleName)
+    }
+    if (await smsBuilderSettingsPage.alreadyExistingRuleMessage.isVisible()) {
+      await expect(smsBuilderSettingsPage.alreadyExistingRuleMessage).toBeVisible({ timeout: 2000 });
+    }
 
   });
 

@@ -40,6 +40,8 @@ const AddPositionLocators = {
     formsSurveyTab: 'li[class="ng-isolate-scope"]',
     formTitleField: '[ng-model="step.form_title"]',
     formDescriptionField: '[ng-model="step.form_description"]',
+    XButton: '[aria-hidden="true"]',
+
     
     successSaveMessage:'div[role="alert"][type="success"]',
 }

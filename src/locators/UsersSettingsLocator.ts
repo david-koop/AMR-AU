@@ -21,6 +21,7 @@ const UsersSettingsLocators = {
     usersOrRolesNameRow:'.settingsListItem.ng-scope',
     successMessage:'div[role="alert"][type="success"]',
     duplicateEmail:'.ng-binding.ng-scope',
+    XButton: '[aria-hidden="true"]',
 
 
 

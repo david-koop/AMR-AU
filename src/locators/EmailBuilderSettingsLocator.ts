@@ -22,7 +22,10 @@ const EmailBuilderSettingsLocators = {
     selectRecipientDropDown:'input[placeholder="Select recipient type..."]',
     templateAndRecipientName:'.nvc-sl-popover-item-name.ng-binding',
     saveRuleButton: '[ng-click="save()"]',
+    cancelRuleButton: '[ng-click="cancel()"]',
     ruleNameRow:'[ng-repeat="rule in rules"]',
+    alreadyExistingRuleMessage: 'div[role="alert"][type="danger"]',
+    XButton: '[aria-hidden="true"]',
  
 }
 export default EmailBuilderSettingsLocators

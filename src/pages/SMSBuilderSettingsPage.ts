@@ -38,9 +38,13 @@ export class SMSBuilderSettingsPage extends BasePage {
     private selectTemplateDropDown: Locator;
     private templateName: Locator;
     private saveRuleButton: Locator;
+    private XButton: Locator;
     templateRowName: Locator;
     ruleNameRow: Locator;
     successSaveMessage: Locator;
+    cancelRuleButton: Locator;
+    alreadyExistingRuleMessage: Locator;
+
 
 
     constructor(page: Page) {
@@ -66,6 +70,9 @@ export class SMSBuilderSettingsPage extends BasePage {
         this.templateName = this.page.locator(SMSBuilderSettingsLocators.templateName);
         this.saveRuleButton = this.page.locator(SMSBuilderSettingsLocators.saveRuleButton);
         this.ruleNameRow = this.page.locator(SMSBuilderSettingsLocators.ruleNameRow);
+        this.cancelRuleButton = this.page.locator(SMSBuilderSettingsLocators.cancelRuleButton);
+        this.alreadyExistingRuleMessage = this.page.locator(SMSBuilderSettingsLocators.alreadyExistingRuleMessage).getByText('matching the already existing rule');
+        this.XButton = this.page.locator(SMSBuilderSettingsLocators.XButton);
 
     }
 
@@ -102,7 +109,7 @@ export class SMSBuilderSettingsPage extends BasePage {
         await this.saveTemplateButton.click()
     }
 
-    async addNewSMSRule(ruleName: string, tagName: tags, status: status,templateName:string,) {
+    async addNewSMSRule(ruleName: string, tagName: tags, status: status, templateName: string,) {
         await this.addEmailRule.click();
         await clickAndFill(this.ruleNameField, ruleName);
         await this.selectTagsDropDown.click();
@@ -110,13 +117,15 @@ export class SMSBuilderSettingsPage extends BasePage {
         await this.selectStatusesDropDown.click();
         await this.statusName.getByText(status).click();
         await this.page.waitForTimeout(500);
-        await this.selectTemplateDropDown.click({delay:50});
-        await this.templateName.getByText(templateName).click({delay:10});
+        await this.selectTemplateDropDown.click({ delay: 50 });
+        await this.templateName.getByText(templateName).first().click({ delay: 10 });
         await this.page.waitForTimeout(500);
         await this.saveRuleButton.click()
     }
 
-
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
 
 
 

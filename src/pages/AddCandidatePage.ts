@@ -39,6 +39,7 @@ export class AddCandidatePage extends BasePage {
     private extraTimeField: Locator;
     private saveButton: Locator;
     private saveWithoutMergeButton: Locator;
+    private XButton: Locator;
     candidateDetailsTitle: Locator;
     MergeCandidateTitle: Locator;
     successSaveMessage: Locator;
@@ -76,6 +77,7 @@ export class AddCandidatePage extends BasePage {
         this.saveWithoutMergeButton = this.page.locator(AddCandidateLocators.saveWithoutMergeButton);
         this.successSaveMessage = this.page.locator(AddCandidateLocators.successSaveMessage);
         this.candidateDetailsTitle = this.page.locator(AddCandidateLocators.candidateDetailsTitle);
+        this.XButton = this.page.locator(AddCandidateLocators.XButton);
 
     }
 
@@ -146,6 +148,11 @@ export class AddCandidatePage extends BasePage {
     }
 
 
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
+
+
 
 
 
@@ -185,11 +192,11 @@ export function getRandomLetters(): string {
     const firstLetter = letters.charAt(Math.floor(Math.random() * letters.length));
     const secondLetter = letters.charAt(Math.floor(Math.random() * letters.length));
     const thirdLetter = letters.charAt(Math.floor(Math.random() * letters.length));
-    
-    return firstLetter + secondLetter + thirdLetter;
-  }
 
-  export function generateTwoNumbers(): number {
+    return firstLetter + secondLetter + thirdLetter;
+}
+
+export function generateTwoNumbers(): number {
 
     return Math.floor(Math.random() * 90) + 10;
 }

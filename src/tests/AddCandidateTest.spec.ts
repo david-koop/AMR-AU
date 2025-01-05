@@ -14,7 +14,7 @@ const positionName = 'position automation'//'QA Position 1'
 const firstName = 'dudua' + getRandomLetters()
 const lastName = 'QAAqq' + getRandomLetters()
 const mobilePhone = '054' + generateID()
-const candidateEmail = 'dudu@daa.com' + getRandomLetters()
+const candidateEmail = 'dudu@ravtech.co.il' + getRandomLetters()
 const candidateID = generateID() + ''
 const street = 'hartom'
 const house = '16'
@@ -71,7 +71,7 @@ test.describe.serial('Add Candidate', () => {
     await addCandidatePage.saveCandidate();
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
     await expect(addCandidatePage.successSaveMessage).toBeVisible({ timeout: 2000 });
-    await addCandidatePage.successSaveMessage.waitFor({ state: 'hidden' })
+    await addCandidatePage.clickCloseMessageButton()
   });
 
 
@@ -91,13 +91,11 @@ test.describe.serial('Add Candidate', () => {
     await expect(addCandidatePage.successSaveMessage).toBeVisible({ timeout: 2000 });
 
 
+    
   });
 
 
 });
-
-
-
 
 
 

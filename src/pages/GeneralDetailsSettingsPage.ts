@@ -22,6 +22,7 @@ export class GeneralDetailsSettingsPage extends BasePage {
     private addBranchButton: Locator;
     private branchNameField: Locator;
     private saveBranchButton: Locator;
+    private XButton: Locator;
     turnOnBranchesButton: Locator;
     successSendMessage: Locator;
     successSaveMessage: Locator;
@@ -44,6 +45,8 @@ export class GeneralDetailsSettingsPage extends BasePage {
         this.successSendMessage = this.page.locator(GeneralDetailsSettingsLocators.successSendMessage);
         this.successSaveMessage = this.page.locator(GeneralDetailsSettingsLocators.successSaveMessage);
         this.branchNameRow = this.page.locator(GeneralDetailsSettingsLocators.branchNameRow);
+        this.XButton = this.page.locator(GeneralDetailsSettingsLocators.XButton);
+
     }
 
     async gotoGeneralSettingsORG(name: string, password: string, organizationName: string) {
@@ -105,7 +108,9 @@ export class GeneralDetailsSettingsPage extends BasePage {
     }
 
 
-
+    async clickCloseMessageButton() {
+        await this.XButton.click();
+    }
 
 
     async getURL() {

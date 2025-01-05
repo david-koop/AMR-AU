@@ -14,6 +14,7 @@ const GeneralDetailsSettingsLocators = {
     saveBranchButton: '.btn.btn-blue-border',
     turnOnBranchesButton: 'label[for="id_branches_enabled"]',
     branchNameRow:'.textEl.ng-binding',
+    XButton: '[aria-hidden="true"]',
 
 
 }

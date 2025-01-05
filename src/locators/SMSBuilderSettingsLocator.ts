@@ -20,6 +20,11 @@ const SMSBuilderSettingsLocators = {
     templateName:'.nvc-sl-popover-item-name.ng-binding',
     saveRuleButton: '[ng-click="save()"]',
     ruleNameRow:'[ng-repeat="rule in rules"]',
+    cancelRuleButton: '[ng-click="cancel()"]',
+    alreadyExistingRuleMessage: 'div[role="alert"][type="danger"]',
+    XButton: '[aria-hidden="true"]',
+
+
  
 }
 export default SMSBuilderSettingsLocators

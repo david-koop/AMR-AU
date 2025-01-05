@@ -60,7 +60,8 @@ test.describe.serial('Organization settings - general', () => {
   test('check SMTP email sender', async () => {
     const settingsPage = new GeneralDetailsSettingsPage(page);
 
-    await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    // await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    await settingsPage.clickCloseMessageButton()
 
     await settingsPage.checkSMTPEmail(email);
 
@@ -77,7 +78,8 @@ test.describe.serial('Organization settings - general', () => {
   test('create two branches and turn on branches', async () => {
     const settingsPage = new GeneralDetailsSettingsPage(page);
 
-    await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    // await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    await settingsPage.clickCloseMessageButton()
 
     await settingsPage.navigateToBranchesTab();
     await settingsPage.addNewBranch(brachName1);
