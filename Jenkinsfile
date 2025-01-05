@@ -40,13 +40,13 @@ pipeline {
             steps {
                 script {
                     // הרץ את הבדיקות באמצעות Playwright
-                    bat 'npx playwright test LoginTest.spec.ts'
+                    bat 'npx playwright test LoginTest.spec.ts --reporter=allure-playwright'
 
                      // הרץ את הבדיקה השנייה
-                    bat 'npx playwright test ChangePasswordTest.spec.ts'
+                    bat 'npx playwright test ChangePasswordTest.spec.ts --reporter=allure-playwright'
 
                     // הרץ את הבדיקה השלישית
-                    bat 'npx playwright test GeneralSettingsTest.spec.ts'
+                    bat 'npx playwright test GeneralSettingsTest.spec.ts --reporter=allure-playwright'
                 }
             }
         }
@@ -55,7 +55,9 @@ pipeline {
     post {
         // שלב זה יתבצע תמיד אחרי סיום ה-Pipeline (גם אם הוא נכשל)
         always {
-            echo 'Cleaning up...'
+            // הפקת דוחות Allure
+            archiveArtifacts '**/allure-results/**'  // אחסן את תיקיית התוצאות של Allure ב-Jenkins
+            allure includeProperties: false, jdk: '', results: '**/allure-results'  // הפקת דוח Allure
         }
     }
 }
