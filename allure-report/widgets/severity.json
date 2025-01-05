@@ -1,0 +1,1 @@
+[{"uid":"a44456a28f0624ad","name":"Send reset link","time":{"start":1736084381035,"stop":1736084386699,"duration":5664},"status":"passed","severity":"normal"},{"uid":"2d396887cf8f783b","name":"Check login","time":{"start":1736084377015,"stop":1736084380286,"duration":3271},"status":"passed","severity":"normal"}]

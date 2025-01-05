@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","3271","Check login","chromium","Sun Jan 05 15:39:37 IST 2025","passed","Sun Jan 05 15:39:40 IST 2025","Login","LoginTest.spec.ts","",""
+"","5664","Send reset link","chromium","Sun Jan 05 15:39:41 IST 2025","passed","Sun Jan 05 15:39:46 IST 2025","Login","LoginTest.spec.ts","",""
