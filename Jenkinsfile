@@ -57,7 +57,7 @@ pipeline {
         always {
             // הפקת דוחות Allure
             archiveArtifacts '**/allure-results/**'  // אחסן את תיקיית התוצאות של Allure ב-Jenkins
-            allure includeProperties: false, jdk: '', results: '**/allure-results'  // הפקת דוח Allure
+            allure includeProperties: false, results: [[path: '**/allure-results']]
         }
     }
 }
