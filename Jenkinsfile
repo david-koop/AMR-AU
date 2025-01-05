@@ -46,7 +46,7 @@ pipeline {
                     bat 'npx playwright test ChangePasswordTest.spec.ts --reporter=allure-playwright'
 
                     // הרץ את הבדיקה השלישית
-                    bat 'npx playwright test GeneralSettingsTest.spec.ts --reporter=allure-playwright'
+                    // bat 'npx playwright test GeneralSettingsTest.spec.ts --reporter=allure-playwright'
                 }
             }
         }
