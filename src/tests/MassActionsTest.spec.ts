@@ -38,7 +38,7 @@ test.describe.serial('Add Candidate', () => {
 
   test.beforeAll(async () => {
 
-    browser = await chromium.launch({ headless: false, slowMo: 40 });
+    browser = await chromium.launch({  slowMo: 40 });
 
     context = await browser.newContext({
       acceptDownloads: true,

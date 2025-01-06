@@ -22,7 +22,7 @@ test.describe.serial('Organization settings - general', () => {
 
   test.beforeAll(async ({ browser }) => {
 
-    browser = await chromium.launch({ headless: false, slowMo: 40 });
+    browser = await chromium.launch({  slowMo: 40 });
     context = await browser.newContext({});
     page = await context.newPage();
 
@@ -60,8 +60,8 @@ test.describe.serial('Organization settings - general', () => {
   test('check SMTP email sender', async () => {
     const settingsPage = new GeneralDetailsSettingsPage(page);
 
-    // await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
-    await settingsPage.clickCloseMessageButton()
+    await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    // await settingsPage.clickCloseMessageButton()
 
     await settingsPage.checkSMTPEmail(email);
 
@@ -78,8 +78,8 @@ test.describe.serial('Organization settings - general', () => {
   test('create two branches and turn on branches', async () => {
     const settingsPage = new GeneralDetailsSettingsPage(page);
 
-    // await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
-    await settingsPage.clickCloseMessageButton()
+    await settingsPage.successSaveMessage.waitFor({ state: 'hidden' })
+    // await settingsPage.clickCloseMessageButton()
 
     await settingsPage.navigateToBranchesTab();
     await settingsPage.addNewBranch(brachName1);

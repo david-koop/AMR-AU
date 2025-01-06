@@ -34,7 +34,7 @@ test.describe.serial('Add Candidate', () => {
 
   test.beforeAll(async ({ browser }) => {
 
-    browser = await chromium.launch({ headless: false, slowMo: 40 });
+    browser = await chromium.launch({ slowMo: 40 });
     context = await browser.newContext({});
     page = await context.newPage();
 
@@ -91,7 +91,7 @@ test.describe.serial('Add Candidate', () => {
     await expect(addCandidatePage.successSaveMessage).toBeVisible({ timeout: 2000 });
 
 
-    
+
   });
 
 

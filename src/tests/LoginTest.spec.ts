@@ -16,7 +16,7 @@ test.describe.serial('Login', () => {
 
 test.beforeAll(async ({ browser }) => {
   
-  browser = await chromium.launch({ headless: false, slowMo:40 });
+  browser = await chromium.launch({  slowMo:40 });
   context = await browser.newContext({})
   page = await context.newPage()
   
