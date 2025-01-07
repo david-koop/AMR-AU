@@ -30,58 +30,44 @@ Follow these steps to get started with the project:
    git clone https://github.com/david-koop/AMR-Automation.git
    cd AMR-Automation
 
-Install dependencies: Use NPM to install the required dependencies:
+2. **Install dependencies**: Use NPM to install the required dependencies:
+   ```bash
+   npm install
+   ```
 
-npm install
+3. **Set up the environment:** If needed, create an .env file in the root directory of the project. This file will be loaded by Jenkins before running the tests.
 
-Set up the environment: If needed, create an .env file in the root directory of the project. This file will be loaded by Jenkins before running the tests.
+## Running the Tests
 
-Directory Structure
-Here's a general overview of the project directory:
+The tests are automatically run via Jenkins, but you can also run them manually using Playwright.
+1. **Run the tests**: To run the tests, use the following command:
+   
+   ```bash
+   npx playwright test <test-file>.spec.ts --reporter=allure-playwright
+   ```
+   For example, to run the login tests:
+   ```bash
+   npx playwright test LoginTest.spec.ts --reporter=allure-playwright
+   ```
+2. **Generate Allure Reports**: After running the tests, Allure reports will be generated in the allure-results directory. Use the following command to open the report:
+   ```
+   allure open
+   ```
 
+
+   
+## Project Directory Structure
+
+Here is the directory structure of the project:
+```
 C:.
 ├───.github
 │   └───workflows
 ├───allure-report
-│   ├───data
-│   │   └───test-cases
-│   ├───export
-│   ├───history
-│   ├───plugin
-│   │   ├───behaviors
-│   │   ├───packages
-│   │   └───screen-diff
-│   └───widgets
 ├───allure-results
 ├───downloads
-├───node_modules
-│   ├───.bin
-│   ├───@cspotcode
-│   │   └───source-map-support
-│   ├───@playwright
-│   │   └───test
 │   ├───allure-playwright
-│   │   └───dist
-│   │       ├───cjs
-│   │       ├───esm
-│   │       └───types
 │   ├───playwright
-│   │   ├───lib
-│   │   │   ├───common
-│   │   │   ├───isomorphic
-│   │   │   ├───loader
-│   │   │   ├───matchers
-│   │   │   ├───plugins
-│   │   │   ├───reporters
-│   │   │   │   └───versions
-│   │   │   ├───runner
-│   │   │   ├───third_party
-│   │   │   ├───transform
-│   │   │   └───worker
-│   │   └───types
-│   ├───typescript
-│   │   ├───bin
-│   │   └───lib
 ├───playwright-report
 ├───src
 │   ├───locators
@@ -90,3 +76,8 @@ C:.
 │   └───utils
 ├───test-results
 └───upload-files
+```
+
+
+## Contact
+If you have any questions or suggestions, feel free to contact us via GitHub Issues or by email at Dudikoop@gmail.com.
