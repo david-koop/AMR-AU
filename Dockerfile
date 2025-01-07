@@ -1,19 +1,19 @@
 FROM mcr.microsoft.com/playwright:v1.48.2-focal
 
-# התקנת Xvfb
+# Install Xvfb
 RUN apt-get update && apt-get install -y xvfb
 
-# הגדרת סביבת עבודה
+# Define workspace
 WORKDIR /app
 
-# העתקת הקבצים
+# Copy file
 COPY package.json package-lock.json* ./
 
-# התקנת חבילות
+# Install Dependencies
 RUN npm install --frozen-lockfile
 
-# העתקת יתר הקבצים
+# Copy all files
 COPY . .
 
-# הרצת Xvfb והפעלה של הבדיקות
+# Run the script
 CMD ["sh", "-c", "xvfb-run -a npx playwright test src/tests/LoginTest.spec.ts --project=chromium"]

@@ -1,9 +1,9 @@
 pipeline {
-    agent { label 'agent-01' }  // תבחר ב-Agent בשם 'agent-01'
+    agent { label 'agent-01' }  // Choose 'agent-01'
 
 
 //    options {
-//         // מבצע כישלון מיידי אם טסט נכשל
+//        // If one test fail the automation will stop
 //         failFast true
 //     }
 
@@ -13,21 +13,19 @@ pipeline {
 
 
     stages {
-        // שלב זה מתקין את התלויות של Node.js, כולל playwright ו-ts-node
         stage('Install Dependencies') {
             steps {
                 script {
-                    // התקן את התלויות ב-Node.js
+                    // all the script is with 'bat' because it's windows
                     bat 'npm install'
                 }
             }
         }
 
-        // שלב זה טוען את קובץ ה-.env ומוסיף את המשתנים לסביבה של Jenkins
+        // load the .ENV file to the job 
         stage('Prepare Environment') {
             steps {
                 script {
-                    // טוען את כל המשתנים מקובץ .env לסביבה של Jenkins
                     bat '''@echo off
                     for /f "delims=" %%i in ('type C:\\Jenkins\\agent\\workspace\\AMR\\.env') do set %%i
                     '''
@@ -35,11 +33,9 @@ pipeline {
             }
         }
 
-        // שלב זה מריץ את הבדיקות באמצעות Playwright
         stage('Run Playwright Tests') {
             steps {
                 script {
-                    // הרץ את הבדיקות באמצעות Playwright
                     bat 'npx playwright test LoginTest.spec.ts --reporter=allure-playwright'
 
                     bat 'npx playwright test ChangePasswordTest.spec.ts --reporter=allure-playwright'
@@ -64,51 +60,10 @@ pipeline {
     }
 
     post {
-        // שלב זה יתבצע תמיד אחרי סיום ה-Pipeline (גם אם הוא נכשל)
         always {
-            // הפקת דוחות Allure
-            archiveArtifacts '**/allure-results/**'  // אחסן את תיקיית התוצאות של Allure ב-Jenkins
+            // create allure report in jenkins
+            archiveArtifacts '**/allure-results/**'  
             allure includeProperties: false, results: [[path: '**/allure-results']]
         }
     }
 }
-
-
-
-// pipeline {
-//     agent any
-
-//     environment {
-//         // משתנה לאחסון שם התמונה שאנחנו רוצים לבנות
-//         DOCKER_IMAGE = "playwright-project"
-//     }
-
-//     stages {
-//         // שלב זה בונה את התמונה של Docker
-//         stage('Build Docker Image') {
-//             steps {
-//                 script {
-//                     // מבצע את פקודת Docker build כדי לבנות את התמונה
-//                     bat 'docker build -t %DOCKER_IMAGE% .'
-//                 }
-//             }
-//         }
-
-//         // שלב זה מריץ את הבדיקות בתוך קונטיינר ה-Docker
-//         stage('Run Playwright Tests') {
-//             steps {
-//                 script {
-//                     // מריץ את הבדיקות בקונטיינר שנבנה בשלב הקודם
-//                     bat 'docker run --rm %DOCKER_IMAGE%'
-//                 }
-//             }
-//         }
-//     }
-
-//     post {
-//         // שלב זה יתבצע תמיד אחרי סיום ה-Pipeline (גם אם הוא נכשל)
-//         always {
-//             echo 'Cleaning up...'
-//         }
-//     }
-// }

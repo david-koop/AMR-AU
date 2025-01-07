@@ -17,7 +17,7 @@ export class MassActionsPage extends BasePage {
 
     private uploadHeader: Locator;
     private updateHeader: Locator;
-    private DownloadUploadTemplate: Locator;
+    DownloadUploadTemplate: Locator;
     private DownloadUpdateTemplate: Locator;
     candidateDetailsTitle: Locator;
 

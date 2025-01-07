@@ -14,39 +14,31 @@ const password = process.env.PASSWORD || ''
 const BaseUrl = ''
 const Url = '/#/'
 const organizationName = process.env.ORGANIZATION_NAME
-const positionName = 'position automation'//'QA Position 1'
-const firstName = 'dudua' + getRandomLetters()
-const lastName = 'QAAqq' + getRandomLetters()
-const mobilePhone = '054' + generateID()
-const candidateEmail = 'dudu@daa.com' + getRandomLetters()
-const candidateID = generateID() + ''
-const street = 'hartom'
-const house = '16'
-const birthYear = '2000'
-const cityName = 'bnei brak'
-const year = getYear() + ''
-const month = getMonth() + ''
-const day = getDay() + ''
-const extraTime = '2'
-const mobilePhone1 = '054' + generateID()
-const candidateID1 = generateID() + ''
+const downloadDirectory = path.resolve('./downloads');
+const today = new Date().toISOString().split('T')[0];
 
 
 
-
-test.describe.serial('Add Candidate', () => {
+test.describe.serial('Mass actions', () => {
 
   test.beforeAll(async () => {
 
-    browser = await chromium.launch({  slowMo: 40 });
+    browser = await chromium.launch({ slowMo: 40 });
 
     context = await browser.newContext({
       acceptDownloads: true,
     });
-
+    
     page = await context.newPage();
 
+
+    // create download folder (if not exist)
+    if (!fs.existsSync(downloadDirectory)) {
+      fs.mkdirSync(downloadDirectory);
+    }
+
   });
+
 
   test.afterAll(async () => {
     await page.close();
@@ -60,21 +52,14 @@ test.describe.serial('Add Candidate', () => {
   test('Download upload template', async () => {
     const massActionPage = new MassActionsPage(page);
 
-    //Set download path
-    const downloadDirectory = path.resolve('./downloads');
-
-    // create download folder (if not exist)
-    if (!fs.existsSync(downloadDirectory)) {
-      fs.mkdirSync(downloadDirectory);
-    }
-
 
 
     await massActionPage.gotoAddCandidatePage(email, password, organizationName);
 
+
+
     //This timeout is because the AMR system returns after one second to the dashboard!
     await massActionPage.page.waitForLoadState('load')
-    let url = await massActionPage.getURL()
     await massActionPage.page.waitForTimeout(3000)
 
     if (await massActionPage.candidateDetailsTitle.isHidden()) {
@@ -82,35 +67,19 @@ test.describe.serial('Add Candidate', () => {
     }
 
 
-    // click download upload file
+    // click download template upload file
     const filePath = await massActionPage.downloadUploadTemplate()
 
     // Save in the download folder
-    let newFilePath = filePath;
-    if (!path.extname(filePath)) {
-      newFilePath = path.join(downloadDirectory, path.basename(filePath) + '.xlsx');
-      fs.renameSync(filePath, newFilePath); // העברת הקובץ עם סיומת
-    }
+    const newFilePath = path.join(downloadDirectory, `Upload_${today}.xlsx`);
+    fs.renameSync(filePath, newFilePath);
+    
+    
 
 
-
-    // בדוק את סיומת הקובץ
-    const fileExtension = path.extname(newFilePath).toLowerCase();
-    console.log('סיומת הקובץ:', fileExtension);
-
-    // אם אתה רוצה לבדוק את סוג הקובץ לפי סיומת
-    if (fileExtension === '.xlsx') {
-      console.log('הקובץ הוא Excel');
-    } else {
-      console.log('סוג הקובץ לא מוכר');
-    }
-
-
-
-    // check if the file exist
-    const fileExists = fs.existsSync(newFilePath);
+  
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    expect(fileExists).toBe(true);
+    expect(fs.existsSync(newFilePath)).toBe(true);
 
 
   });
@@ -122,8 +91,6 @@ test.describe.serial('Add Candidate', () => {
   test('Download update template', async () => {
     const massActionPage = new MassActionsPage(page);
 
-    //Set download path
-    const downloadDirectory = path.resolve('./downloads');
 
     if (await massActionPage.candidateDetailsTitle.isHidden()) {
       await massActionPage.clickAddCandidatePage()
@@ -132,11 +99,13 @@ test.describe.serial('Add Candidate', () => {
     // click download upload file
     const filePath = await massActionPage.downloadUpdateTemplate()
 
+     // Save in the download folder
+     const newFilePath = path.join(downloadDirectory, `Update_${today}.xlsx`);
+     fs.renameSync(filePath, newFilePath);
 
-    // check if the file exist
-    const fileExists = fs.existsSync(filePath);
+
     /*---------------------------------------------------------- ASSERT -----------------------------------------------------------------------------------*/
-    expect(fileExists).toBe(true);
+    expect(fs.existsSync(newFilePath)).toBe(true);
 
 
   });
