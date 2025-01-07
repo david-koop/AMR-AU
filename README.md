@@ -40,8 +40,49 @@ Directory Structure
 Here's a general overview of the project directory:
 
 C:.
+├───.github
+│   └───workflows
+├───allure-report
+│   ├───data
+│   │   └───test-cases
+│   ├───export
+│   ├───history
+│   ├───plugin
+│   │   ├───behaviors
+│   │   ├───packages
+│   │   └───screen-diff
+│   └───widgets
 ├───allure-results
+├───downloads
 ├───node_modules
+│   ├───.bin
+│   ├───@cspotcode
+│   │   └───source-map-support
+│   ├───@playwright
+│   │   └───test
+│   ├───allure-playwright
+│   │   └───dist
+│   │       ├───cjs
+│   │       ├───esm
+│   │       └───types
+│   ├───playwright
+│   │   ├───lib
+│   │   │   ├───common
+│   │   │   ├───isomorphic
+│   │   │   ├───loader
+│   │   │   ├───matchers
+│   │   │   ├───plugins
+│   │   │   ├───reporters
+│   │   │   │   └───versions
+│   │   │   ├───runner
+│   │   │   ├───third_party
+│   │   │   ├───transform
+│   │   │   └───worker
+│   │   └───types
+│   ├───typescript
+│   │   ├───bin
+│   │   └───lib
+├───playwright-report
 ├───src
 │   ├───locators
 │   ├───pages
